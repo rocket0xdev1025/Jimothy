@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Jimothy The Raccoon | $Jimothy</title>
+  <meta name="description" content="Jimothy the raccoon is taking over social media right now, going viral across platforms and capturing everyone's attention. Short spine, big heart." />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:wght@600;700;800;900&display=swap" rel="stylesheet" />
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            forest: {
+              deep: '#1a3d1f',
+              mid: '#2d6a35',
+              bright: '#4caf50',
+              leaf: '#7dcf7a',
+              mist: '#c8e6c9',
+            },
+            cream: {
+              DEFAULT: '#fff8e7',
+              soft: '#f5ecd7',
+              warm: '#ffe9b5',
+            },
+            bark: {
+              DEFAULT: '#3e2723',
+              light: '#5d4037',
+              wood: '#c4a574',
+            },
+            raccoon: {
+              gray: '#8a8a8a',
+              dark: '#2f2f2f',
+              mask: '#1a1a1a',
+            },
+          },
+          fontFamily: {
+            display: ['Fredoka', 'system-ui', 'sans-serif'],
+            body: ['Nunito', 'system-ui', 'sans-serif'],
+          },
+          boxShadow: {
+            sticker: '4px 4px 0 #3e2723',
+            'sticker-lg': '6px 6px 0 #3e2723',
+            pop: '0 8px 0 #1a3d1f',
+          },
+          animation: {
+            float: 'float 4s ease-in-out infinite',
+            'float-slow': 'float 6s ease-in-out infinite',
+            wiggle: 'wiggle 2.5s ease-in-out infinite',
+            bounce-soft: 'bounceSoft 2s ease-in-out infinite',
+            leaf-fall: 'leafFall 12s linear infinite',
+            sparkle: 'sparkle 2s ease-in-out infinite',
+          },
+          keyframes: {
+            float: {
+              '0%, 100%': { transform: 'translateY(0)' },
+              '50%': { transform: 'translateY(-12px)' },
+            },
+            wiggle: {
+              '0%, 100%': { transform: 'rotate(-2deg)' },
+              '50%': { transform: 'rotate(2deg)' },
+            },
+            bounceSoft: {
+              '0%, 100%': { transform: 'translateY(0) scale(1)' },
+              '50%': { transform: 'translateY(-8px) scale(1.02)' },
+            },
+            leafFall: {
+              '0%': { transform: 'translateY(-10%) rotate(0deg)', opacity: '0' },
+              '10%': { opacity: '0.7' },
+              '100%': { transform: 'translateY(110vh) rotate(360deg)', opacity: '0' },
+            },
+            sparkle: {
+              '0%, 100%': { opacity: '0.3', transform: 'scale(0.8)' },
+              '50%': { opacity: '1', transform: 'scale(1.2)' },
+            },
+          },
+        },
+      },
+    };
+  </script>
+  <style>
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Nunito', system-ui, sans-serif;
+      background:
+        radial-gradient(ellipse at 20% 0%, rgba(125, 207, 122, 0.35) 0%, transparent 50%),
+        radial-gradient(ellipse at 80% 20%, rgba(255, 233, 181, 0.4) 0%, transparent 45%),
+        radial-gradient(ellipse at 50% 100%, rgba(45, 106, 53, 0.25) 0%, transparent 55%),
+        linear-gradient(180deg, #e8f5e9 0%, #fff8e7 35%, #d7ecc8 70%, #a8d5a2 100%);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    .font-display { font-family: 'Fredoka', system-ui, sans-serif; }
+
+    .comic-stroke {
+      -webkit-text-stroke: 2px #3e2723;
+      paint-order: stroke fill;
+      text-shadow: 3px 3px 0 rgba(62, 39, 35, 0.25);
+    }
+
+    .forest-pattern {
+      background-image:
+        url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 8c-2 6-8 10-8 16 0 4 3 8 8 8s8-4 8-8c0-6-6-10-8-16z' fill='%234caf50' fill-opacity='0.08'/%3E%3C/svg%3E");
+    }
+
+    .bubble-host { position: relative; }
+
+    .bubble {
+      position: absolute;
+      border-radius: 50%;
+      background: radial-gradient(circle at 30% 30%, #ffffff, #e8f5e9 60%, transparent 70%);
+      border: 2px solid rgba(255, 255, 255, 0.9);
+      pointer-events: none;
+      z-index: 50;
+      animation: bubblePop 0.7s ease-out forwards;
+      box-shadow: inset -2px -2px 4px rgba(255, 255, 255, 0.8), 0 0 8px rgba(255, 255, 255, 0.5);
+    }
+
+    @keyframes bubblePop {
+      0% {
+        transform: translate(0, 0) scale(0.2);
+        opacity: 1;
+      }
+      70% {
+        opacity: 0.85;
+      }
+      100% {
+        transform: translate(var(--tx), var(--ty)) scale(1.4);
+        opacity: 0;
+      }
+    }
+
+    .sticker {
+      border: 3px solid #3e2723;
+      box-shadow: 4px 4px 0 #3e2723;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .sticker:hover {
+      transform: translate(-2px, -2px);
+      box-shadow: 6px 6px 0 #3e2723;
+    }
+
+    .btn-pop {
+      border: 3px solid #3e2723;
+      box-shadow: 0 6px 0 #1a3d1f;
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
+    }
+
+    .btn-pop:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 9px 0 #1a3d1f;
+    }
+
+    .btn-pop:active {
+      transform: translateY(2px);
+      box-shadow: 0 2px 0 #1a3d1f;
+    }
+
+    .social-x {
+      background: #0f0f0f;
+      border-radius: 9999px;
+      overflow: hidden;
+    }
+
+    .ca-input {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    }
+
+    .dex-frame {
+      border: 4px solid #3e2723;
+      border-radius: 1.5rem;
+      overflow: hidden;
+      box-shadow: 6px 6px 0 #3e2723;
+      background: #0b1220;
+    }
+
+    .step-num {
+      background: linear-gradient(145deg, #ffe9b5, #f5c842);
+      border: 3px solid #3e2723;
+      box-shadow: 3px 3px 0 #3e2723;
+    }
+
+    .hero-banner {
+      border: 4px solid #3e2723;
+      box-shadow: 8px 8px 0 #3e2723;
+      border-radius: 1.75rem;
+      overflow: hidden;
+    }
+
+    .nav-glass {
+      background: rgba(255, 248, 231, 0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 3px solid #3e2723;
+    }
+
+    .toast {
+      position: fixed;
+      bottom: 2rem;
+      left: 50%;
+      transform: translateX(-50%) translateY(120%);
+      background: #2d6a35;
+      color: #fff8e7;
+      border: 3px solid #3e2723;
+      box-shadow: 4px 4px 0 #3e2723;
+      padding: 0.75rem 1.5rem;
+      border-radius: 9999px;
+      font-weight: 800;
+      z-index: 100;
+      transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+      pointer-events: none;
+    }
+
+    .toast.show {
+      transform: translateX(-50%) translateY(0);
+    }
+
+    .leaf {
+      position: fixed;
+      top: -40px;
+      font-size: 1.25rem;
+      pointer-events: none;
+      z-index: 1;
+      animation: leafFall linear infinite;
+      opacity: 0.65;
+    }
+  </style>
+</head>
+<body class="font-body text-bark forest-pattern">
+  <div id="leaves" aria-hidden="true"></div>
+  <div id="toast" class="toast">CA copied!</div>
+
+  <!-- Nav -->
+  <header class="nav-glass sticky top-0 z-40">
+    <div class="mx-auto flex max-w-6xl items-center justify-between gap-3 px-4 py-3">
+      <a href="#top" class="bubble-host flex items-center gap-2 group">
+        <img src="logo.png" alt="Jimothy logo" class="h-12 w-12 rounded-full border-3 border-bark object-cover shadow-sticker sm:h-14 sm:w-14" style="border-width:3px" />
+        <div class="leading-tight">
+          <p class="font-display text-lg font-bold text-forest-deep sm:text-xl">Jimothy</p>
+          <p class="text-xs font-bold text-forest-mid sm:text-sm">The Raccoon</p>
+        </div>
+      </a>
+
+      <nav class="hidden items-center gap-1 md:flex">
+        <a href="#about" class="bubble-host rounded-full px-3 py-2 text-sm font-extrabold text-bark hover:bg-forest-mist">About</a>
+        <a href="#how-to-buy" class="bubble-host rounded-full px-3 py-2 text-sm font-extrabold text-bark hover:bg-forest-mist">How to Buy</a>
+        <a href="#chart" class="bubble-host rounded-full px-3 py-2 text-sm font-extrabold text-bark hover:bg-forest-mist">Chart</a>
+      </nav>
+
+      <div class="flex items-center gap-2">
+        <a href="https://t.me/Jimothy_Raccoon" target="_blank" rel="noopener noreferrer" class="bubble-host social-link" aria-label="Telegram">
+          <img src="tg.png" alt="Telegram" class="h-10 w-10 rounded-full border-2 border-bark object-cover shadow-sticker transition hover:scale-110" />
+        </a>
+        <a href="https://x.com/Jimothycoin_Sol" target="_blank" rel="noopener noreferrer" class="bubble-host social-link social-x inline-flex border-2 border-bark shadow-sticker transition hover:scale-110" aria-label="X / Twitter">
+          <img src="x.png" alt="X (Twitter)" class="h-10 w-10 object-cover" />
+        </a>
+        <a href="https://app.uniswap.org/swap?chain=robinhood&outputCurrency=TBA" target="_blank" rel="noopener noreferrer" class="bubble-host btn-pop hidden rounded-full bg-forest-bright px-4 py-2 text-sm font-extrabold text-cream sm:inline-block">
+          Buy Now
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main id="top">
+    <!-- Hero -->
+    <section class="relative mx-auto max-w-6xl px-4 pb-8 pt-8 sm:pt-12">
+      <div class="pointer-events-none absolute left-8 top-4 text-2xl animate-sparkle" aria-hidden="true">✨</div>
+      <div class="pointer-events-none absolute right-12 top-16 text-xl animate-sparkle" style="animation-delay:0.6s" aria-hidden="true">✨</div>
+
+      <div class="text-center">
+        <img src="logo.png" alt="Jimothy The Raccoon" class="mx-auto mb-4 h-28 w-28 animate-bounce-soft rounded-full border-4 border-bark object-cover shadow-sticker-lg sm:h-36 sm:w-36" />
+
+        <h1 class="font-display comic-stroke text-5xl font-bold uppercase tracking-wide text-cream sm:text-7xl md:text-8xl">
+          Jimothy
+        </h1>
+        <p class="font-display mt-1 text-2xl font-bold text-forest-mid sm:text-3xl md:text-4xl">
+          The Raccoon
+        </p>
+        <p class="mx-auto mt-3 inline-block rounded-full border-3 border-bark bg-bark-wood px-5 py-2 text-sm font-extrabold uppercase tracking-wide text-bark shadow-sticker sm:text-base" style="border-width:3px">
+          Short spine, big heart ♥ · $Jimothy
+        </p>
+      </div>
+
+      <div class="hero-banner bubble-host mx-auto mt-8 max-w-5xl">
+        <img src="banner.png" alt="Jimothy The Raccoon banner — short spine, big heart" class="w-full object-cover" />
+      </div>
+
+      <p class="mx-auto mt-8 max-w-2xl text-center text-lg font-bold leading-relaxed text-bark sm:text-xl">
+        Jimothy the raccoon is taking over social media right now, going viral across platforms and capturing everyone’s attention.
+      </p>
+
+      <div class="mt-8 flex flex-wrap items-center justify-center gap-4">
+        <a href="https://app.uniswap.org/swap?chain=robinhood&outputCurrency=TBA" target="_blank" rel="noopener noreferrer" class="bubble-host btn-pop inline-flex items-center gap-2 rounded-full bg-forest-bright px-8 py-4 text-lg font-extrabold text-cream">
+          <span>🛒</span> Buy Now
+        </a>
+        <a href="https://dexscreener.com/robinhood/TBA" target="_blank" rel="noopener noreferrer" class="bubble-host btn-pop inline-flex items-center gap-2 rounded-full bg-cream-warm px-8 py-4 text-lg font-extrabold text-bark">
+          <span>📈</span> Chart
+        </a>
+      </div>
+
+      <!-- Contract Address -->
+      <div class="bubble-host mx-auto mt-8 max-w-xl rounded-2xl border-3 border-bark bg-cream p-4 shadow-sticker" style="border-width:3px">
+        <p class="mb-2 text-center text-xs font-extrabold uppercase tracking-widest text-forest-mid">Contract Address · $Jimothy</p>
+        <div class="flex flex-col gap-2 sm:flex-row sm:items-center">
+          <input
+            id="ca-value"
+            type="text"
+            readonly
+            value="TBA"
+            class="ca-input bubble-host w-full flex-1 rounded-xl border-2 border-bark bg-cream-soft px-3 py-3 text-center text-sm font-bold text-bark outline-none sm:text-left"
+          />
+          <button type="button" id="copy-ca" class="bubble-host btn-pop shrink-0 rounded-full bg-forest-deep px-5 py-3 text-sm font-extrabold text-cream">
+            Copy CA
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- About -->
+    <section id="about" class="mx-auto max-w-6xl px-4 py-16">
+      <div class="grid items-center gap-10 md:grid-cols-2">
+        <div class="relative order-2 md:order-1">
+          <div class="absolute -left-3 -top-3 h-full w-full rounded-3xl bg-forest-bright/30" aria-hidden="true"></div>
+          <img src="logo.png" alt="Jimothy mascot" class="bubble-host relative w-full max-w-md animate-float rounded-3xl border-4 border-bark object-cover shadow-sticker-lg mx-auto" />
+        </div>
+        <div class="order-1 md:order-2">
+          <p class="font-display text-sm font-bold uppercase tracking-widest text-forest-bright">The viral raccoon</p>
+          <h2 class="font-display comic-stroke mt-2 text-4xl font-bold text-cream sm:text-5xl">Meet Jimothy</h2>
+          <p class="mt-4 text-lg font-bold leading-relaxed text-bark">
+            Born from chaos and a short spine, <span class="text-forest-mid">Jimothy The Raccoon</span> ($Jimothy) is the meme that won’t sit still. He’s sprinting across feeds, stacking vibes, and turning every scroll into a forest takeover.
+          </p>
+          <p class="mt-3 text-base font-semibold leading-relaxed text-bark-light">
+            No roadmap fluff — just a cartoon raccoon with big heart energy, Robinhood ETH liquidity, and a community that’s already howling.
+          </p>
+          <div class="mt-6 flex flex-wrap gap-3">
+            <span class="bubble-host rounded-full border-2 border-bark bg-forest-mist px-4 py-2 text-sm font-extrabold text-forest-deep">#Jimothy</span>
+            <span class="bubble-host rounded-full border-2 border-bark bg-cream-warm px-4 py-2 text-sm font-extrabold text-bark">Robinhood ETH</span>
+            <span class="bubble-host rounded-full border-2 border-bark bg-cream px-4 py-2 text-sm font-extrabold text-bark">Short Spine Era</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- How to Buy -->
+    <section id="how-to-buy" class="relative py-16">
+      <div class="absolute inset-0 bg-forest-deep/5" aria-hidden="true"></div>
+      <div class="relative mx-auto max-w-6xl px-4">
+        <div class="text-center">
+          <p class="font-display text-sm font-bold uppercase tracking-widest text-forest-bright">Easy as trash diving</p>
+          <h2 class="font-display comic-stroke mt-2 text-4xl font-bold text-cream sm:text-5xl">How to Buy</h2>
+          <p class="mx-auto mt-3 max-w-xl text-base font-bold text-bark">
+            Grab $Jimothy on Uniswap using Robinhood ETH in four simple steps.
+          </p>
+        </div>
+
+        <div class="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          <article class="bubble-host sticker rounded-3xl bg-cream p-6 text-center">
+            <div class="step-num mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-full font-display text-2xl font-bold text-bark">1</div>
+            <h3 class="font-display text-xl font-bold text-forest-deep">Get Robinhood ETH</h3>
+            <p class="mt-2 text-sm font-semibold leading-relaxed text-bark-light">
+              Fund a wallet with ETH on the Robinhood chain — that’s the fuel Jimothy runs on.
+            </p>
+          </article>
+
+          <article class="bubble-host sticker rounded-3xl bg-cream p-6 text-center">
+            <div class="step-num mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-full font-display text-2xl font-bold text-bark">2</div>
+            <h3 class="font-display text-xl font-bold text-forest-deep">Open Uniswap</h3>
+            <p class="mt-2 text-sm font-semibold leading-relaxed text-bark-light">
+              Head to Uniswap, switch network to Robinhood, and connect your wallet.
+            </p>
+          </article>
+
+          <article class="bubble-host sticker rounded-3xl bg-cream p-6 text-center">
+            <div class="step-num mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-full font-display text-2xl font-bold text-bark">3</div>
+            <h3 class="font-display text-xl font-bold text-forest-deep">Swap for $Jimothy</h3>
+            <p class="mt-2 text-sm font-semibold leading-relaxed text-bark-light">
+              Paste the CA (or hit Buy Now), set ETH → $Jimothy, and review the quote.
+            </p>
+          </article>
+
+          <article class="bubble-host sticker rounded-3xl bg-cream p-6 text-center">
+            <div class="step-num mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-full font-display text-2xl font-bold text-bark">4</div>
+            <h3 class="font-display text-xl font-bold text-forest-deep">Confirm & Hold</h3>
+            <p class="mt-2 text-sm font-semibold leading-relaxed text-bark-light">
+              Approve the swap, celebrate with the community, and let Jimothy cook.
+            </p>
+          </article>
+        </div>
+
+        <div class="mt-10 text-center">
+          <a href="https://app.uniswap.org/swap?chain=robinhood&outputCurrency=TBA" target="_blank" rel="noopener noreferrer" class="bubble-host btn-pop inline-flex items-center gap-2 rounded-full bg-forest-bright px-8 py-4 text-lg font-extrabold text-cream">
+            Buy $Jimothy Now
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Chart / Dexscreener -->
+    <section id="chart" class="mx-auto max-w-6xl px-4 py-16">
+      <div class="text-center">
+        <p class="font-display text-sm font-bold uppercase tracking-widest text-forest-bright">Live vibes</p>
+        <h2 class="font-display comic-stroke mt-2 text-4xl font-bold text-cream sm:text-5xl">Chart</h2>
+        <p class="mx-auto mt-3 max-w-xl text-base font-bold text-bark">
+          Watch $Jimothy move in real time on Dexscreener.
+        </p>
+        <a href="https://dexscreener.com/robinhood/TBA" target="_blank" rel="noopener noreferrer" class="bubble-host btn-pop mt-6 inline-flex items-center gap-2 rounded-full bg-cream-warm px-6 py-3 text-base font-extrabold text-bark">
+          Open Dexscreener ↗
+        </a>
+      </div>
+
+      <div class="dex-frame bubble-host mx-auto mt-10 aspect-[16/10] w-full max-w-5xl">
+        <iframe
+          title="Jimothy Dexscreener chart"
+          src="https://dexscreener.com/robinhood/TBA?embed=1&theme=dark&trades=0&info=0"
+          class="h-full w-full border-0"
+          loading="lazy"
+          allow="clipboard-write"
+        ></iframe>
+      </div>
+    </section>
+
+    <!-- Community -->
+    <section class="mx-auto max-w-6xl px-4 pb-20">
+      <div class="sticker bubble-host overflow-hidden rounded-3xl bg-gradient-to-br from-forest-mid to-forest-deep p-8 text-center sm:p-12">
+        <h2 class="font-display text-3xl font-bold text-cream sm:text-4xl">Join the Forest Takeover</h2>
+        <p class="mx-auto mt-3 max-w-lg text-base font-bold text-forest-mist">
+          Jimothy’s already viral — hop in Telegram and X before the whole timeline goes raccoon.
+        </p>
+        <div class="mt-8 flex flex-wrap items-center justify-center gap-8">
+          <a href="https://t.me/Jimothy_Raccoon" target="_blank" rel="noopener noreferrer" class="bubble-host inline-flex flex-col items-center gap-2 transition hover:scale-105">
+            <img src="tg.png" alt="Telegram" class="h-16 w-16 rounded-full border-3 border-cream object-cover shadow-lg" style="border-width:3px" />
+            <span class="text-sm font-extrabold text-cream">Telegram</span>
+          </a>
+          <a href="https://x.com/Jimothycoin_Sol" target="_blank" rel="noopener noreferrer" class="bubble-host inline-flex flex-col items-center gap-2 transition hover:scale-105">
+            <span class="social-x inline-flex h-16 w-16 items-center justify-center border-3 border-cream shadow-lg" style="border-width:3px">
+              <img src="x.png" alt="X" class="h-16 w-16 object-cover" />
+            </span>
+            <span class="text-sm font-extrabold text-cream">Follow on X</span>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="border-t-4 border-bark bg-forest-deep py-8 text-center text-cream">
+    <div class="mx-auto flex max-w-6xl flex-col items-center gap-3 px-4">
+      <div class="flex items-center gap-2">
+        <img src="logo.png" alt="" class="h-10 w-10 rounded-full border-2 border-cream object-cover" />
+        <p class="font-display text-lg font-bold">Jimothy The Raccoon · $Jimothy</p>
+      </div>
+      <p class="text-xs font-semibold text-forest-mist">
+        Meme coin for entertainment. Not financial advice. DYOR.
+      </p>
+      <div class="flex gap-3">
+        <a href="https://t.me/Jimothy_Raccoon" target="_blank" rel="noopener noreferrer" class="bubble-host text-sm font-bold underline decoration-forest-leaf underline-offset-2 hover:text-forest-leaf">Telegram</a>
+        <a href="https://x.com/Jimothycoin_Sol" target="_blank" rel="noopener noreferrer" class="bubble-host text-sm font-bold underline decoration-forest-leaf underline-offset-2 hover:text-forest-leaf">X</a>
+        <a href="https://dexscreener.com/robinhood/TBA" target="_blank" rel="noopener noreferrer" class="bubble-host text-sm font-bold underline decoration-forest-leaf underline-offset-2 hover:text-forest-leaf">Chart</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    (function () {
+      const CA = 'TBA';
+      const toast = document.getElementById('toast');
+      const copyBtn = document.getElementById('copy-ca');
+      const caInput = document.getElementById('ca-value');
+
+      function showToast(msg) {
+        toast.textContent = msg;
+        toast.classList.add('show');
+        clearTimeout(showToast._t);
+        showToast._t = setTimeout(function () {
+          toast.classList.remove('show');
+        }, 1800);
+      }
+
+      function copyCA() {
+        const text = caInput ? caInput.value : CA;
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(text).then(function () {
+            showToast('CA copied!');
+          }).catch(fallbackCopy);
+        } else {
+          fallbackCopy();
+        }
+
+        function fallbackCopy() {
+          if (!caInput) return;
+          caInput.select();
+          caInput.setSelectionRange(0, 99999);
+          try {
+            document.execCommand('copy');
+            showToast('CA copied!');
+          } catch (e) {
+            showToast('Copy failed');
+          }
+        }
+      }
+
+      if (copyBtn) copyBtn.addEventListener('click', copyCA);
+
+      /* White bubble explosion on hover */
+      function spawnBubbles(e, host) {
+        const rect = host.getBoundingClientRect();
+        const originX = e.clientX - rect.left;
+        const originY = e.clientY - rect.top;
+        const count = 8 + Math.floor(Math.random() * 6);
+
+        for (let i = 0; i < count; i++) {
+          const bubble = document.createElement('span');
+          bubble.className = 'bubble';
+          const size = 10 + Math.random() * 28;
+          const angle = (Math.PI * 2 * i) / count + Math.random() * 0.4;
+          const dist = 40 + Math.random() * 70;
+          const tx = Math.cos(angle) * dist;
+          const ty = Math.sin(angle) * dist - 20;
+
+          bubble.style.width = size + 'px';
+          bubble.style.height = size + 'px';
+          bubble.style.left = originX - size / 2 + 'px';
+          bubble.style.top = originY - size / 2 + 'px';
+          bubble.style.setProperty('--tx', tx + 'px');
+          bubble.style.setProperty('--ty', ty + 'px');
+          bubble.style.animationDuration = 0.5 + Math.random() * 0.4 + 's';
+
+          host.appendChild(bubble);
+          setTimeout(function () {
+            bubble.remove();
+          }, 800);
+        }
+      }
+
+      document.querySelectorAll('.bubble-host').forEach(function (el) {
+        let cool = false;
+        el.addEventListener('mouseenter', function (e) {
+          if (cool) return;
+          cool = true;
+          spawnBubbles(e, el);
+          setTimeout(function () {
+            cool = false;
+          }, 280);
+        });
+      });
+
+      /* Falling leaves */
+      const leaves = document.getElementById('leaves');
+      const glyphs = ['🍃', '🌿', '🍂'];
+      for (let i = 0; i < 10; i++) {
+        const leaf = document.createElement('span');
+        leaf.className = 'leaf';
+        leaf.textContent = glyphs[i % glyphs.length];
+        leaf.style.left = Math.random() * 100 + 'vw';
+        leaf.style.animationDuration = 10 + Math.random() * 12 + 's';
+        leaf.style.animationDelay = Math.random() * 8 + 's';
+        leaf.style.fontSize = 0.9 + Math.random() * 0.8 + 'rem';
+        leaves.appendChild(leaf);
+      }
+    })();
+  </script>
+</body>
+</html>
